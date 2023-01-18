@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping2/domain/cart/models/cart_model.dart';
+import 'package:shopping2/ui/app/enums/enums.dart';
 
 part 'cart_state.dart';
 
@@ -20,7 +21,7 @@ class CartCubit extends Cubit<CartState> {
   add(CartModel item) {
     List<CartModel> cart = [];
 
-    cart.addAll(state.cart);
+    cart.addAll(state.data);
     cart.add(item);
 
     calculateTotal(cart);
@@ -29,7 +30,7 @@ class CartCubit extends Cubit<CartState> {
   remove(CartModel item) {
     List<CartModel> cart = [];
 
-    cart.addAll(state.cart);
+    cart.addAll(state.data);
     cart.removeWhere((element) => element.id == item.id);
     calculateTotal(cart);
   }
@@ -38,7 +39,7 @@ class CartCubit extends Cubit<CartState> {
     var result = false;
     List<CartModel> cart = [];
 
-    cart.addAll(state.cart);
+    cart.addAll(state.data);
 
     for (var element in cart) {
       if (element.id == item.id) {
@@ -53,7 +54,7 @@ class CartCubit extends Cubit<CartState> {
   increase(CartModel item) {
     List<CartModel> cart = [];
 
-    cart.addAll(state.cart);
+    cart.addAll(state.data);
     if (item.quantity! < 10) {
       item.quantity = item.quantity! + 1;
       calculateTotal(cart);
@@ -63,7 +64,7 @@ class CartCubit extends Cubit<CartState> {
   decrease(CartModel item) {
     List<CartModel> cart = [];
 
-    cart.addAll(state.cart);
+    cart.addAll(state.data);
     if (item.quantity! > 1) {
       item.quantity = item.quantity! - 1;
       calculateTotal(cart);

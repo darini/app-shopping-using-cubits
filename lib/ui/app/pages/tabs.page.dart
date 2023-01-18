@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shopping2/ui/app/pages/home_page.dart';
 import 'package:shopping2/ui/cart/cubits/cart_cubit.dart';
+import 'package:shopping2/ui/cart/pages/cart_page.dart';
 
 class TabsPage extends StatelessWidget {
   const TabsPage({Key? key}) : super(key: key);
@@ -13,9 +14,7 @@ class TabsPage extends StatelessWidget {
       body: TabBarView(
         children: <Widget>[
           const HomePage(),
-          Container(
-            color: Colors.blue,
-          ),
+          CartPage(),
           Container(
             color: Colors.red,
           )
@@ -57,7 +56,7 @@ class TabsPage extends StatelessWidget {
                           context
                               .read<CartCubit>()
                               .state
-                              .cart
+                              .data
                               .length
                               .toString(),
                           style: const TextStyle(

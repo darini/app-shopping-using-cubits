@@ -1,11 +1,11 @@
 part of 'cart_cubit.dart';
 
 class CartState extends Equatable {
-  final List<CartModel> cart;
+  final List<CartModel> data;
   final double total;
 
   const CartState._({
-    this.cart = const [],
+    this.data = const [],
     this.total = 0,
   });
 
@@ -13,10 +13,10 @@ class CartState extends Equatable {
     required List<CartModel> cart,
     required double total,
   }) : this._(
-          cart: cart,
+          data: cart,
           total: total,
         );
 
   @override
-  List<Object?> get props => [cart, total];
+  List<Object?> get props => [data, total];
 }

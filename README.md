@@ -1,0 +1,1 @@
+# shopping2-balta.io

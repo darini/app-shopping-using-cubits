@@ -23,6 +23,8 @@ class AuthCubit extends Cubit<AuthState> {
       : super(const AuthState._());
 
   Future<bool> authenticate(AuthenticatedAccountModel account) async {
+    emit(const AuthState.loading());
+
     try {
       var prefs = await SharedPreferences.getInstance();
 

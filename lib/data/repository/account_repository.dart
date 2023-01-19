@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:shopping2/domain/account/models/create_account_model.dart';
 import 'package:shopping2/domain/account/models/authenticated_account_model.dart';
@@ -15,6 +17,8 @@ class AccountRepository implements IAccountRepository {
       Response response = await Dio().post(url, data: account.toJson());
 
       accountAuthenticated = AccountModel.fromJson(response.data);
+
+      Future.delayed(const Duration(seconds: 5));
 
       return accountAuthenticated;
     } catch (ex) {

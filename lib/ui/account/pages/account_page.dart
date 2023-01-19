@@ -5,6 +5,7 @@ import 'package:shopping2/ui/account/auth/widgets/authenticated_user_card.widget
 import 'package:shopping2/ui/account/auth/widgets/unauthenticated_user_card.widget.dart';
 import 'package:shopping2/ui/account/cubits/account_cubit.dart';
 import 'package:shopping2/ui/app/enums/enums.dart';
+import 'package:shopping2/ui/app/widgets/loader.widget.dart';
 import 'package:shopping2/ui/app/widgets/my_snackBar.dart';
 
 class AccountPage extends StatelessWidget {
@@ -61,9 +62,14 @@ class AccountPage extends StatelessWidget {
                 ),
               ),
             ),
-            body: state.isAuthenticated
-                ? const AuthenticatedUserCard()
-                : const UnauthenticatedUserCard(),
+            body: state.isLoading
+                ? Loader(
+                    state: state,
+                    callback: null,
+                  )
+                : (state.isAuthenticated
+                    ? const AuthenticatedUserCard()
+                    : const UnauthenticatedUserCard()),
           );
         },
       ),

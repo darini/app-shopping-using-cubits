@@ -17,9 +17,11 @@ class AuthState extends Equatable {
   const AuthState._({
     this.authStatus = AuthStatus.unauthenticated,
     this.account,
-    this.status = LoadStatus.loading,
+    this.status = LoadStatus.none,
     this.message,
   });
+
+  const AuthState.loading() : this._(status: LoadStatus.loading);
 
   const AuthState.authenticated({
     required AccountModel account,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shopping2/ui/account/pages/login_page.dart';
-import 'package:shopping2/ui/account/pages/signup_page.dart';
 
 class UnauthenticatedUserCard extends StatelessWidget {
   const UnauthenticatedUserCard({Key? key}) : super(key: key);
@@ -26,12 +25,12 @@ class UnauthenticatedUserCard extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SignupPage(),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => //const SignupPage(),
+            //   ),
+            // );
           },
           child: const Text('Ainda não sou cadastrado'),
         ),

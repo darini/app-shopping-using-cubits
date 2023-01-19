@@ -100,14 +100,14 @@ class _LoginPageState extends State<LoginPage> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
 
-                      await context.read<AuthCubit>().authenticate(
+                      context.read<AuthCubit>().authenticate(
                             account,
                           );
                       //authenticate(context);
 
-                      if (context.read<AuthCubit>().state.account != null) {
-                        Navigator.pop(context);
-                      }
+                      //if (context.read<AuthCubit>().state.account != null) {
+                      Navigator.pop(context);
+                      // }
                     }
                   },
                   child: const Text(

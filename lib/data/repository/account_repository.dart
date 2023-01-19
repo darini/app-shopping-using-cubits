@@ -18,8 +18,6 @@ class AccountRepository implements IAccountRepository {
 
       accountAuthenticated = AccountModel.fromJson(response.data);
 
-      Future.delayed(const Duration(seconds: 5));
-
       return accountAuthenticated;
     } catch (ex) {
       return accountAuthenticated;

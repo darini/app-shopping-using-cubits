@@ -3,7 +3,11 @@ part of 'account_cubit.dart';
 class AccountState extends Equatable {
   final LoadStatus status;
   final AccountModel? account;
-  final String message;
+  final String? message;
+
+  bool get hasMessage => message != null && message != '';
+
+  bool get isLoading => status == LoadStatus.loading;
 
   const AccountState._({
     this.status = LoadStatus.none,

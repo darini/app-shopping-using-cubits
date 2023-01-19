@@ -24,7 +24,7 @@ class MySackBar extends SnackBar {
             ),
           ),
           duration: const Duration(seconds: 2),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blue,
         );
 
   MySackBar.error({required this.message})
@@ -48,6 +48,6 @@ class MySackBar extends SnackBar {
             ),
           ),
           duration: const Duration(seconds: 2),
-          backgroundColor: Colors.black38,
+          backgroundColor: const Color.fromARGB(250, 107, 204, 249),
         );
 }

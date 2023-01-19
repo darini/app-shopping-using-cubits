@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping2/ui/account/auth/cubits/auth_cubit.dart';
 import 'package:shopping2/ui/app/widgets/my_snackBar.dart';
 import 'package:shopping2/ui/categories/cubits/category_cubit.dart';
 import 'package:shopping2/ui/categories/widgets/category_list.widget.dart';
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     context.read<CategoryCubit>().getAll();
-    context.read<ProductCubit>().getAll();
+    _getProducts();
 
     return Scaffold(
       body: Padding(
@@ -45,6 +46,14 @@ class _HomePageState extends State<HomePage> {
               listener: (_, state) => showSnackBarError(
                 state.message,
               ),
+            ),
+            BlocListener<AuthCubit, AuthState>(
+              listenWhen: (previous, current) => current.hasMessage,
+              listener: (_, state) => state.isAuthenticated
+                  ? showSnackBarSuccess(state.message)
+                  : showSnackBarError(
+                      state.message,
+                    ),
             ),
           ],
           child: ListView(
@@ -93,4 +102,11 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  void _getProducts() => context.read<ProductCubit>().state.selectedCategory ==
+          'todos'
+      ? context.read<ProductCubit>().getAll()
+      : context
+          .read<ProductCubit>()
+          .getByCategory(context.read<ProductCubit>().state.selectedCategory);
 }

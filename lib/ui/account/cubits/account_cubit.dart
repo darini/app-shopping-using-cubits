@@ -1,11 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shopping2/domain/account/models/account_model.dart';
 import 'package:shopping2/domain/account/repositories/account_repository_interface.dart';
 import 'package:shopping2/ui/app/enums/enums.dart';
 
 part 'account_state.dart';
 
+@singleton
 class AccountCubit extends Cubit<AccountState> {
   final IAccountRepository _accountRepository;
 

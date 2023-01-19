@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shopping2/di/di.config.dart';
 
 final getIt = GetIt.instance;
 
@@ -8,6 +9,4 @@ final getIt = GetIt.instance;
   preferRelativeImports: true, // default
   asExtension: false, // default
 )
-void configureDependencies() => {};
-
-//void configureDependencies() => getIt.init();
+void configureDependencies() => init(getIt);

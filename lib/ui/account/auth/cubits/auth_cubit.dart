@@ -31,6 +31,8 @@ class AuthCubit extends Cubit<AuthState> {
       AccountModel accountAuthenticated =
           await _accountRepository.authenticate(account);
 
+      _accountCubit.loadAccount(accountAuthenticated);
+
       await prefs.setString('account', jsonEncode(accountAuthenticated));
 
       String welcomeMessage = _cartCubit.state.data.isEmpty
@@ -41,8 +43,6 @@ class AuthCubit extends Cubit<AuthState> {
         AuthState.authenticated(
             account: accountAuthenticated, welcomeMessage: welcomeMessage),
       );
-
-      _accountCubit.loadAccount(accountAuthenticated);
 
       return true;
     } catch (ex) {

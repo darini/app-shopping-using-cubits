@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shopping2/domain/cart/models/cart_model.dart';
 import 'package:shopping2/ui/app/enums/enums.dart';
 
 part 'cart_state.dart';
 
+@lazySingleton
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(const CartState._());
 

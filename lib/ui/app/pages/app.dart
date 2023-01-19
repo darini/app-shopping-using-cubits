@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping2/data/repository/account_repository.dart';
-import 'package:shopping2/data/repository/category_repository.dart';
-import 'package:shopping2/data/repository/product_repository.dart';
+import 'package:shopping2/di/di.dart';
 import 'package:shopping2/domain/account/repositories/account_repository_interface.dart';
 import 'package:shopping2/domain/categories/repositories/category_repository_interface.dart';
 import 'package:shopping2/domain/products/repositories/product_repository_interface.dart';
@@ -19,31 +17,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    ICategoryRepository _categoryRepository = CategoryRepository();
-    IProductRepository _productRepository = ProductRepository();
-
-    IAccountRepository _accountRepository = AccountRepository();
-
     return MultiBlocProvider(
       providers: [
-        //Category Cubit
-        BlocProvider(create: (_) => CategoryCubit(_categoryRepository)),
-
-        //Product Cubit
-        BlocProvider(create: (_) => ProductCubit(_productRepository)),
-
-        //Product Cubit
-        BlocProvider(create: (_) => CartCubit()),
-
+        //Account Cubit
         BlocProvider(
-          create: (_) => AccountCubit(_accountRepository),
+          create: (_) => AccountCubit(getIt<IAccountRepository>()),
         ),
+
+        //Category Cubit
+        BlocProvider(
+            create: (_) => CategoryCubit(getIt<ICategoryRepository>())),
+
+        //Product Cubit
+        BlocProvider(create: (_) => ProductCubit(getIt<IProductRepository>())),
+
+        //Cart Cubit
+        BlocProvider(create: (_) => CartCubit()),
       ],
       child: BlocProvider(
         create: (context) => AuthCubit(
-          _accountRepository,
+          getIt<IAccountRepository>(),
           context.read<AccountCubit>(),
-          context.read<CartCubit>(),
+          getIt<CartCubit>(),
         ),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

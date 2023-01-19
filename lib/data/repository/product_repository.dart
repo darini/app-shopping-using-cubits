@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shopping2/domain/products/models/product_model.dart';
 import 'package:shopping2/domain/products/repositories/product_repository_interface.dart';
 import 'package:shopping2/util/constants.dart';
 
+@LazySingleton(as: IProductRepository)
 class ProductRepository implements IProductRepository {
   @override
   Future<List<ProductModel>> getAll({String? category}) async {

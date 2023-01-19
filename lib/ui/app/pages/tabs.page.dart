@@ -12,8 +12,6 @@ class TabsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProductCubit>().getAll();
-
     return Scaffold(
       body: TabBarView(
         children: <Widget>[

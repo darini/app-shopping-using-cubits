@@ -21,23 +21,22 @@ class MyApp extends StatelessWidget {
       providers: [
         //Account Cubit
         BlocProvider(
-          create: (_) => AccountCubit(getIt<IAccountRepository>()),
+          create: (_) => getIt<AccountCubit>(),
         ),
 
         //Category Cubit
-        BlocProvider(
-            create: (_) => CategoryCubit(getIt<ICategoryRepository>())),
+        BlocProvider(create: (_) => getIt<CategoryCubit>()),
 
         //Product Cubit
-        BlocProvider(create: (_) => ProductCubit(getIt<IProductRepository>())),
+        BlocProvider(create: (_) => getIt<ProductCubit>()),
 
         //Cart Cubit
-        BlocProvider(create: (_) => CartCubit()),
+        BlocProvider(create: (_) => getIt<CartCubit>()),
       ],
       child: BlocProvider(
         create: (context) => AuthCubit(
           getIt<IAccountRepository>(),
-          context.read<AccountCubit>(),
+          getIt<AccountCubit>(),
           getIt<CartCubit>(),
         ),
         child: MaterialApp(

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping2/di/di.dart';
 import 'package:shopping2/domain/account/repositories/account_repository_interface.dart';
-import 'package:shopping2/domain/categories/repositories/category_repository_interface.dart';
-import 'package:shopping2/domain/products/repositories/product_repository_interface.dart';
 import 'package:shopping2/ui/account/auth/cubits/auth_cubit.dart';
 import 'package:shopping2/ui/account/cubits/account_cubit.dart';
 import 'package:shopping2/ui/app/pages/tabs.page.dart';

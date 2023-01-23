@@ -15,6 +15,8 @@ class AccountState extends Equatable {
     this.message = '',
   });
 
+  const AccountState.initial() : this._();
+
   const AccountState.loading() : this._(status: LoadStatus.loading);
 
   const AccountState.failure({
@@ -36,8 +38,9 @@ class AccountState extends Equatable {
   }) : this._(
           status: LoadStatus.success,
           account: account,
+          message: 'Cadastro criado com sucesso',
         );
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [status, account, message];
 }

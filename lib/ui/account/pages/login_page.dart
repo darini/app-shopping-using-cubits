@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping2/domain/account/models/account_model.dart';
 import 'package:shopping2/domain/account/models/authenticated_account_model.dart';
 import 'package:shopping2/ui/account/auth/cubits/auth_cubit.dart';
-import 'package:shopping2/ui/app/widgets/loader.widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -103,11 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                       context.read<AuthCubit>().authenticate(
                             account,
                           );
-                      //authenticate(context);
-
-                      //if (context.read<AuthCubit>().state.account != null) {
                       Navigator.pop(context);
-                      // }
                     }
                   },
                   child: const Text(

@@ -18,16 +18,23 @@ class AccountRepository implements IAccountRepository {
     try {
       Response response = await Dio().post(url, data: account.toJson());
 
-      accountAuthenticated = AccountModel.fromJson(response.data);
-
-      return accountAuthenticated;
+      return AccountModel.fromJson(response.data);
     } catch (ex) {
       return accountAuthenticated;
     }
   }
 
   @override
-  Future<AccountModel> create(CreateAccountModel account) {
-    throw UnimplementedError();
+  Future<AccountModel> create(CreateAccountModel account) async {
+    var url = '${apiUrl}v1/account';
+
+    AccountModel accountCreated = AccountModel();
+    try {
+      Response response = await Dio().post(url, data: account.toJson());
+
+      return AccountModel.fromJson(response.data);
+    } catch (ex) {
+      return accountCreated;
+    }
   }
 }

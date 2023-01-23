@@ -57,6 +57,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   void logout() {
     _accountCubit.clearAccount();
-    emit(const AuthState.unauthenticated(message: ''));
+    emit(const AuthState._());
   }
 }

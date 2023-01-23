@@ -23,13 +23,19 @@ class MyApp extends StatelessWidget {
         ),
 
         //Category Cubit
-        BlocProvider(create: (_) => getIt<CategoryCubit>()),
+        BlocProvider(
+          create: (_) => getIt<CategoryCubit>(),
+        ),
 
         //Product Cubit
-        BlocProvider(create: (_) => getIt<ProductCubit>()),
+        BlocProvider(
+          create: (_) => getIt<ProductCubit>(),
+        ),
 
         //Cart Cubit
-        BlocProvider(create: (_) => getIt<CartCubit>()),
+        BlocProvider(
+          create: (_) => getIt<CartCubit>(),
+        ),
       ],
       child: BlocProvider(
         create: (context) => AuthCubit(

@@ -31,19 +31,26 @@ class AuthCubit extends Cubit<AuthState> {
       AccountModel accountAuthenticated =
           await _accountRepository.authenticate(account);
 
-      _accountCubit.loadAccount(accountAuthenticated);
+      if (accountAuthenticated.id != null) {
+        _accountCubit.loadAccount(accountAuthenticated);
 
-      await prefs.setString('account', jsonEncode(accountAuthenticated));
+        await prefs.setString('account', jsonEncode(accountAuthenticated));
 
-      String welcomeMessage = _cartCubit.state.data.isEmpty
-          ? 'Bem vindo ${accountAuthenticated.name}, seu carrinho está vazio, que tal adicionar alguns itens?'
-          : 'Bem vindo ${accountAuthenticated.name}, finalize sua compra para aproveitar os seus produtos :)';
+        String welcomeMessage = _cartCubit.state.data.isEmpty
+            ? 'Bem vindo ${accountAuthenticated.name}, seu carrinho está vazio, que tal adicionar alguns itens?'
+            : 'Bem vindo ${accountAuthenticated.name}, finalize sua compra para aproveitar os seus produtos :)';
 
-      emit(
-        AuthState.authenticated(
-            account: accountAuthenticated, welcomeMessage: welcomeMessage),
-      );
-
+        emit(
+          AuthState.authenticated(
+              account: accountAuthenticated, welcomeMessage: welcomeMessage),
+        );
+      } else {
+        emit(
+          const AuthState.unauthenticated(
+            message: 'Login ou senha inválidos',
+          ),
+        );
+      }
       return true;
     } catch (ex) {
       emit(

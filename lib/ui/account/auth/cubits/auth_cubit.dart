@@ -22,7 +22,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._accountRepository, this._accountCubit, this._cartCubit)
       : super(const AuthState._());
 
-  Future<bool> authenticate(AuthenticatedAccountModel account) async {
+  authenticate(AuthenticatedAccountModel account) async {
     emit(const AuthState.loading());
 
     try {
@@ -62,8 +62,31 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void logout() {
+  loadAccount() async {
+    var prefs = await SharedPreferences.getInstance();
+
+    var accountPreferences = jsonDecode(
+      prefs.getString('account')!,
+    );
+
+    if (accountPreferences != null) {
+      AccountModel? account = AccountModel.fromJson(accountPreferences);
+
+      emit(
+        AuthState.authenticated(
+            account: account,
+            welcomeMessage:
+                'Bem vindo ${account.name}, seu carrinho está vazio, que tal adicionar alguns itens?'),
+      );
+      _accountCubit.loadAccount(account);
+    }
+  }
+
+  logout() async {
+    var prefs = await SharedPreferences.getInstance();
+
     _accountCubit.clearAccount();
+    prefs.remove('account');
     emit(const AuthState._());
   }
 }

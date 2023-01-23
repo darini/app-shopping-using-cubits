@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping2/di/di.dart';
+import 'package:shopping2/ui/account/auth/cubits/auth_cubit.dart';
 import 'package:shopping2/ui/account/pages/account_page.dart';
 
 import 'package:shopping2/ui/app/pages/home_page.dart';
@@ -12,12 +13,19 @@ class TabsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getIt<AuthCubit>().loadAccount();
+
     return Scaffold(
       body: TabBarView(
         children: <Widget>[
           const HomePage(),
           CartPage(),
-          const AccountPage(),
+          BlocBuilder<AuthCubit, AuthState>(
+            buildWhen: (previous, current) => previous != current,
+            builder: (context, state) {
+              return const AccountPage();
+            },
+          ),
         ],
       ),
       bottomNavigationBar: TabBar(

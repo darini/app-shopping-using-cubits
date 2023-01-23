@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shopping2/di/di.dart';
 import 'package:shopping2/domain/products/models/product_model.dart';
 import 'package:shopping2/ui/cart/widgets/add_to_cart.widget.dart';
+import 'package:shopping2/ui/products/cubits/product_cubit.dart';
 import 'package:shopping2/ui/products/pages/product_page.dart';
 
 class ProductCard extends StatelessWidget {
@@ -26,6 +28,8 @@ class ProductCard extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
+              getIt<ProductCubit>().getByTag(item.tag!);
+
               Navigator.push(
                 context,
                 MaterialPageRoute(

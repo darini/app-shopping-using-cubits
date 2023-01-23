@@ -33,4 +33,19 @@ class ProductCubit extends BaseFetchCubit<ProductState> {
       emit(ProductState.loaded(category, products: data));
     });
   }
+
+  void getByTag(String tag) async {
+    List<ProductModel> _products = [];
+
+    _products.addAll(state.data);
+
+    emit(ProductState.loading(
+      state.selectedCategory,
+    ));
+
+    ProductModel _product = await _productRepository.getByTag(tag);
+
+    emit(ProductState.loaded(state.selectedCategory,
+        products: _products, product: _product));
+  }
 }

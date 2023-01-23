@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:shopping2/domain/cart/models/cart_model.dart';
-import 'package:shopping2/ui/app/widgets/loader.widget.dart';
 import 'package:shopping2/ui/cart/cubits/cart_cubit.dart';
 import 'package:shopping2/ui/cart/widgets/cart_item.widget.dart';
 
@@ -14,9 +13,6 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //itens = [];
-    //itens.addAll(context.read<CartCubit>().state.data);
-
     return BlocBuilder<CartCubit, CartState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {

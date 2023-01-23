@@ -28,17 +28,17 @@ import '../ui/products/cubits/product_cubit.dart'
 _i1.GetIt init(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
-  gh.lazySingleton<_i3.CartCubit>(() => _i3.CartCubit());
-  gh.lazySingleton<_i4.IAccountRepository>(() => _i5.AccountRepository());
-  gh.lazySingleton<_i6.ICategoryRepository>(() => _i7.CategoryRepository());
-  gh.lazySingleton<_i8.IProductRepository>(() => _i9.ProductRepository());
-  gh.lazySingleton<_i10.ProductCubit>(
-      () => _i10.ProductCubit(get<_i8.IProductRepository>()));
+  gh.singleton<_i3.CartCubit>(_i3.CartCubit());
+  gh.singleton<_i4.IAccountRepository>(_i5.AccountRepository());
+  gh.singleton<_i6.ICategoryRepository>(_i7.CategoryRepository());
+  gh.singleton<_i8.IProductRepository>(_i9.ProductRepository());
+  gh.singleton<_i10.ProductCubit>(
+      _i10.ProductCubit(get<_i8.IProductRepository>()));
   gh.singleton<_i11.AccountCubit>(
       _i11.AccountCubit(get<_i4.IAccountRepository>()));
   gh.singleton<_i12.AuthCubit>(_i12.AuthCubit(get<_i4.IAccountRepository>(),
       get<_i11.AccountCubit>(), get<_i3.CartCubit>()));
-  gh.lazySingleton<_i13.CategoryCubit>(
-      () => _i13.CategoryCubit(get<_i6.ICategoryRepository>()));
+  gh.singleton<_i13.CategoryCubit>(
+      _i13.CategoryCubit(get<_i6.ICategoryRepository>()));
   return get;
 }

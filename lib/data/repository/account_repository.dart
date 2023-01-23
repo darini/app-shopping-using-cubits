@@ -8,8 +8,9 @@ import 'package:shopping2/domain/account/models/account_model.dart';
 import 'package:shopping2/domain/account/repositories/account_repository_interface.dart';
 import 'package:shopping2/util/constants.dart';
 
-@LazySingleton(as: IAccountRepository)
+@Singleton(as: IAccountRepository)
 class AccountRepository implements IAccountRepository {
+  @preResolve
   @override
   Future<AccountModel> authenticate(AuthenticatedAccountModel account) async {
     var url = '${apiUrl}v1/account/login';

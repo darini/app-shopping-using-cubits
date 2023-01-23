@@ -6,7 +6,7 @@ import 'package:shopping2/domain/categories/models/category_model.dart';
 
 part 'category_state.dart';
 
-@lazySingleton
+@singleton
 class CategoryCubit extends Cubit<CategoryState> {
   final ICategoryRepository _categoryRepository;
 

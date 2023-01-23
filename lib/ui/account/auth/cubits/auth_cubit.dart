@@ -22,7 +22,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._accountRepository, this._accountCubit, this._cartCubit)
       : super(const AuthState._());
 
-  Future<bool> authenticate(AuthenticatedAccountModel account) async {
+  authenticate(AuthenticatedAccountModel account) async {
     emit(const AuthState.loading());
 
     try {
@@ -31,19 +31,26 @@ class AuthCubit extends Cubit<AuthState> {
       AccountModel accountAuthenticated =
           await _accountRepository.authenticate(account);
 
-      _accountCubit.loadAccount(accountAuthenticated);
+      if (accountAuthenticated.id != null) {
+        _accountCubit.loadAccount(accountAuthenticated);
 
-      await prefs.setString('account', jsonEncode(accountAuthenticated));
+        await prefs.setString('account', jsonEncode(accountAuthenticated));
 
-      String welcomeMessage = _cartCubit.state.data.isEmpty
-          ? 'Bem vindo ${accountAuthenticated.name}, seu carrinho está vazio, que tal adicionar alguns itens?'
-          : 'Bem vindo ${accountAuthenticated.name}, finalize sua compra para aproveitar os seus produtos :)';
+        String welcomeMessage = _cartCubit.state.data.isEmpty
+            ? 'Bem vindo ${accountAuthenticated.name}, seu carrinho está vazio, que tal adicionar alguns itens?'
+            : 'Bem vindo ${accountAuthenticated.name}, finalize sua compra para aproveitar os seus produtos :)';
 
-      emit(
-        AuthState.authenticated(
-            account: accountAuthenticated, welcomeMessage: welcomeMessage),
-      );
-
+        emit(
+          AuthState.authenticated(
+              account: accountAuthenticated, welcomeMessage: welcomeMessage),
+        );
+      } else {
+        emit(
+          const AuthState.unauthenticated(
+            message: 'Login ou senha inválidos',
+          ),
+        );
+      }
       return true;
     } catch (ex) {
       emit(
@@ -55,8 +62,31 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void logout() {
+  loadAccount() async {
+    var prefs = await SharedPreferences.getInstance();
+
+    var accountPreferences = jsonDecode(
+      prefs.getString('account')!,
+    );
+
+    if (accountPreferences != null) {
+      AccountModel? account = AccountModel.fromJson(accountPreferences);
+
+      emit(
+        AuthState.authenticated(
+            account: account,
+            welcomeMessage:
+                'Bem vindo ${account.name}, seu carrinho está vazio, que tal adicionar alguns itens?'),
+      );
+      _accountCubit.loadAccount(account);
+    }
+  }
+
+  logout() async {
+    var prefs = await SharedPreferences.getInstance();
+
     _accountCubit.clearAccount();
+    prefs.remove('account');
     emit(const AuthState._());
   }
 }

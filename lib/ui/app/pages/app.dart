@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping2/di/di.dart';
-import 'package:shopping2/domain/account/repositories/account_repository_interface.dart';
 import 'package:shopping2/ui/account/auth/cubits/auth_cubit.dart';
 import 'package:shopping2/ui/account/cubits/account_cubit.dart';
 import 'package:shopping2/ui/app/pages/tabs.page.dart';
@@ -17,6 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        //Auth Cubit
+        BlocProvider(
+          create: (_) => getIt<AuthCubit>(),
+        ),
+
         //Account Cubit
         BlocProvider(
           create: (_) => getIt<AccountCubit>(),
@@ -37,22 +41,15 @@ class MyApp extends StatelessWidget {
           create: (_) => getIt<CartCubit>(),
         ),
       ],
-      child: BlocProvider(
-        create: (context) => AuthCubit(
-          getIt<IAccountRepository>(),
-          getIt<AccountCubit>(),
-          getIt<CartCubit>(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Shopping',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
         ),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Shopping',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: const DefaultTabController(
-            length: 3,
-            child: TabsPage(),
-          ),
+        home: const DefaultTabController(
+          length: 3,
+          child: TabsPage(),
         ),
       ),
     );

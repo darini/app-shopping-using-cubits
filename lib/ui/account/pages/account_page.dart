@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping2/di/di.dart';
 import 'package:shopping2/ui/account/auth/cubits/auth_cubit.dart';
 import 'package:shopping2/ui/account/auth/widgets/authenticated_user_card.widget.dart';
 import 'package:shopping2/ui/account/auth/widgets/unauthenticated_user_card.widget.dart';

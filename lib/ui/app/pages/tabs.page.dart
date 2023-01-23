@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping2/di/di.dart';
+import 'package:shopping2/ui/account/pages/account_page.dart';
 
 import 'package:shopping2/ui/app/pages/home_page.dart';
 import 'package:shopping2/ui/cart/cubits/cart_cubit.dart';
@@ -15,11 +17,7 @@ class TabsPage extends StatelessWidget {
         children: <Widget>[
           const HomePage(),
           CartPage(),
-          Container(
-            color: Colors.red,
-          )
-          //CartPage(),
-          //const AccountPage(),
+          const AccountPage(),
         ],
       ),
       bottomNavigationBar: TabBar(
@@ -31,8 +29,6 @@ class TabsPage extends StatelessWidget {
             ),
           ),
           BlocBuilder<CartCubit, CartState>(
-              //listener: (context, state) => state.cart.length,
-              //child:
               buildWhen: (previous, current) => previous != current,
               builder: (context, state) {
                 return Tab(
@@ -53,12 +49,7 @@ class TabsPage extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          context
-                              .read<CartCubit>()
-                              .state
-                              .data
-                              .length
-                              .toString(),
+                          getIt<CartCubit>().state.data.length.toString(),
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

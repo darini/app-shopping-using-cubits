@@ -6,7 +6,7 @@ import 'package:shopping2/ui/app/enums/enums.dart';
 
 part 'product_state.dart';
 
-@lazySingleton
+@singleton
 class ProductCubit extends BaseFetchCubit<ProductState> {
   final IProductRepository _productRepository;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping2/domain/categories/models/category_model.dart';
+import 'package:shopping2/ui/app/cubits/settings_cubit.dart';
 import 'package:shopping2/ui/products/cubits/product_cubit.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -25,7 +26,8 @@ class CategoryCard extends StatelessWidget {
           ),
         ),
         child: TextButton(
-          child: Image.asset('assets/categories/light/${item?.tag}.png'),
+          child: Image.asset(
+              'assets/categories/${context.read<SettingsCubit>().state.currentTheme}/${item?.tag}.png'),
           onPressed: () {
             context.read<ProductCubit>().getByCategory(item?.tag);
           },

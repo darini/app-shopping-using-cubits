@@ -21,7 +21,7 @@ class ThemeWidget extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Shopping',
-          theme: getTheme(state.getTheme),
+          theme: getTheme(state.currentTheme),
           home: const DefaultTabController(
             length: 3,
             child: TabsPage(),

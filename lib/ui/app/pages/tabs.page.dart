@@ -13,8 +13,6 @@ class TabsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getIt<AuthCubit>().loadAccount();
-
     return Scaffold(
       body: TabBarView(
         children: <Widget>[

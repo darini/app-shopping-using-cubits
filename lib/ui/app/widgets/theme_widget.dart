@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping2/ui/account/auth/cubits/auth_cubit.dart';
 import 'package:shopping2/ui/app/cubits/settings_cubit.dart';
 import 'package:shopping2/ui/app/pages/tabs.page.dart';
 import 'package:shopping2/ui/themes/dark_theme.dart';
@@ -10,6 +11,9 @@ class ThemeWidget extends StatelessWidget {
   const ThemeWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    context.read<SettingsCubit>().loadTheme();
+    context.read<AuthCubit>().loadAccount();
+
     return BlocBuilder<SettingsCubit, SettingsState>(
       buildWhen: (previous, current) =>
           previous.currentTheme != current.currentTheme,

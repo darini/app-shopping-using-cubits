@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping2/di/di.dart';
 import 'package:shopping2/ui/account/auth/cubits/auth_cubit.dart';
 import 'package:shopping2/ui/account/cubits/account_cubit.dart';
-import 'package:shopping2/ui/app/pages/tabs.page.dart';
+import 'package:shopping2/ui/app/cubits/settings_cubit.dart';
+import 'package:shopping2/ui/app/widgets/theme_widget.dart';
 import 'package:shopping2/ui/cart/cubits/cart_cubit.dart';
 import 'package:shopping2/ui/categories/cubits/category_cubit.dart';
 import 'package:shopping2/ui/products/cubits/product_cubit.dart';
@@ -26,6 +27,10 @@ class MyApp extends StatelessWidget {
           create: (_) => getIt<AccountCubit>(),
         ),
 
+        BlocProvider(
+          create: (_) => getIt<SettingsCubit>(),
+        ),
+
         //Category Cubit
         BlocProvider(
           create: (_) => getIt<CategoryCubit>(),
@@ -41,17 +46,7 @@ class MyApp extends StatelessWidget {
           create: (_) => getIt<CartCubit>(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Shopping',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const DefaultTabController(
-          length: 3,
-          child: TabsPage(),
-        ),
-      ),
+      child: const ThemeWidget(),
     );
   }
 }

@@ -16,10 +16,11 @@ import '../domain/categories/repositories/category_repository_interface.dart'
     as _i6;
 import '../domain/products/repositories/product_repository_interface.dart'
     as _i8;
-import '../ui/account/auth/cubits/auth_cubit.dart' as _i12;
-import '../ui/account/cubits/account_cubit.dart' as _i11;
+import '../ui/account/auth/cubits/auth_cubit.dart' as _i13;
+import '../ui/account/cubits/account_cubit.dart' as _i12;
+import '../ui/app/cubits/settings_cubit.dart' as _i11;
 import '../ui/cart/cubits/cart_cubit.dart' as _i3;
-import '../ui/categories/cubits/category_cubit.dart' as _i13;
+import '../ui/categories/cubits/category_cubit.dart' as _i14;
 import '../ui/products/cubits/product_cubit.dart'
     as _i10; // ignore_for_file: unnecessary_lambdas
 
@@ -34,11 +35,12 @@ _i1.GetIt init(_i1.GetIt get,
   gh.singleton<_i8.IProductRepository>(_i9.ProductRepository());
   gh.singleton<_i10.ProductCubit>(
       _i10.ProductCubit(get<_i8.IProductRepository>()));
-  gh.singleton<_i11.AccountCubit>(
-      _i11.AccountCubit(get<_i4.IAccountRepository>()));
-  gh.singleton<_i12.AuthCubit>(_i12.AuthCubit(get<_i4.IAccountRepository>(),
-      get<_i11.AccountCubit>(), get<_i3.CartCubit>()));
-  gh.singleton<_i13.CategoryCubit>(
-      _i13.CategoryCubit(get<_i6.ICategoryRepository>()));
+  gh.singleton<_i11.SettingsCubit>(_i11.SettingsCubit());
+  gh.singleton<_i12.AccountCubit>(
+      _i12.AccountCubit(get<_i4.IAccountRepository>()));
+  gh.singleton<_i13.AuthCubit>(_i13.AuthCubit(get<_i4.IAccountRepository>(),
+      get<_i12.AccountCubit>(), get<_i3.CartCubit>()));
+  gh.singleton<_i14.CategoryCubit>(
+      _i14.CategoryCubit(get<_i6.ICategoryRepository>()));
   return get;
 }

@@ -65,12 +65,11 @@ class AuthCubit extends Cubit<AuthState> {
   loadAccount() async {
     var prefs = await SharedPreferences.getInstance();
 
-    var accountPreferences = jsonDecode(
-      prefs.getString('account')!,
-    );
+    String? accountPreferences = prefs.getString('account');
 
     if (accountPreferences != null) {
-      AccountModel? account = AccountModel.fromJson(accountPreferences);
+      AccountModel? account =
+          AccountModel.fromJson(jsonDecode(accountPreferences));
 
       emit(
         AuthState.authenticated(

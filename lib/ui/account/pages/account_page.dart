@@ -5,6 +5,7 @@ import 'package:shopping2/ui/account/auth/widgets/authenticated_user_card.widget
 import 'package:shopping2/ui/account/auth/widgets/unauthenticated_user_card.widget.dart';
 import 'package:shopping2/ui/account/cubits/account_cubit.dart';
 import 'package:shopping2/ui/app/enums/enums.dart';
+import 'package:shopping2/ui/app/pages/settings_page.dart';
 import 'package:shopping2/ui/app/widgets/loader.widget.dart';
 import 'package:shopping2/ui/app/widgets/my_snackBar.dart';
 
@@ -54,11 +55,11 @@ class AccountPage extends StatelessWidget {
             appBar: AppBar(
               leading: TextButton(
                 onPressed: () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ,
-                  //   ),
-                  // );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsPage(),
+                    ),
+                  );
                 },
                 child: const Icon(
                   Icons.settings,

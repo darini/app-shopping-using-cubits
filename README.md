@@ -1,6 +1,6 @@
-# shopping2-balta.io
+# app-shopping-using-cubits
 
-> Project re-created in the balta.io course 'Creating scalable native apps with flutter, bloc, provider' using Cubit's with flutter
+> Project recreated in the balta.io course 'Creating scalable native apps with flutter, bloc, provider' using Cubit's with flutter
 
 ### Original Project
 
